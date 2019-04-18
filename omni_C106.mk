@@ -19,17 +19,36 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/omni/config/common.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+ 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.keystore=msm8952
+
+# Inherit language packages
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
+# Charger
+PRODUCT_PACKAGES += \
+	charger_res_images \
+	charger
+
+# Encryption
+PRODUCT_PACKAGES += \
+    libcryptfs_hw
+
+# Kernel
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/Image.gz-dtb:kernel
+
+
+
+# Encryption
+PRODUCT_PACKAGES += \
+libcryptfs_hw 
 
 # Device identifier. This must come after all inclusions
-PRODUCT_NAME := omni_s2
-PRODUCT_DEVICE := s2
-PRODUCT_BRAND := LeEco
-PRODUCT_MANUFACTURER := LeMobile
-PRODUCT_MODEL := LeEco Le 2
+PRODUCT_NAME := omni_C106
+PRODUCT_DEVICE := C106
+PRODUCT_BRAND := Coolpad
+PRODUCT_MANUFACTURER := Coolpad
+PRODUCT_MODEL := Coolpad Cool1 Dual
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_DEVICE=le_s2_ww \
-    PRODUCT_NAME=Le2_WW \
-    PRIVATE_BUILD_DESC="s2-user 6.0.1 IIXOSOP5801910121S 44 release-keys"
-
-BUILD_FINGERPRINT := Letv/Le2_WW/le_s2_ww:6.0.1/IIXOSOP5801910121S/44:user/release-keys

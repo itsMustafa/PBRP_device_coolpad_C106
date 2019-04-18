@@ -13,16 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# OTA Assert
-TARGET_OTA_ASSERT_DEVICE := s2
 
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8952
-TARGET_NO_BOOTLOADER := true
-
-# Platform
-TARGET_BOARD_PLATFORM := msm8952
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno510
+LOCAL_PATH := device/coolpad/C106
 
 # Architecture
 TARGET_ARCH := arm64
@@ -37,38 +29,49 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53.a57
 
-TARGET_USES_64_BIT_BINDER := true
+# Platform
+TARGET_BOARD_PLATFORM := msm8952
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno510
+TARGET_BOARD_SUFFIX := _64
 
-# Kernel
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MSM8952
+TARGET_NO_BOOTLOADER := true
+
+# Kernel 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x00000100
-TARGET_PREBUILT_KERNEL := device/leeco/s2/prebuilt/Image.gz-dtb
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_RAMDISK_OFFSET := 0x02000000
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/Image.gz-dtb
 
-# Partitions
+# Partitions 
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864 
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 57033596416
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864 
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296 
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 2499394560 # (55696871×1024) - 16384
 
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
 # Full disk encryption
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_FBE := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_CRYPTO_OLD := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-RECOVERY_VARIANT := twrp
 TW_THEME := portrait_hdpi
 BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_SDCARD_ON_DATA := true
@@ -76,10 +79,24 @@ TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_DEFAULT_BRIGHTNESS := "160"
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_CRYPTO := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_OREO_MR1_F2FS := true
 TW_EXCLUDE_TWRPAPP := true
-TW_INCLUDE_NTFS_3G := true
+AB_OTA_UPDATER := false
+
+# OTA Assert
+TARGET_OTA_ASSERT_DEVICE := C106
+
+# exFAT FS Support
+TW_INCLUDE_FUSE_EXFAT := true
+
+# NTFS Support
+TW_INCLUDE_FUSE_NTFS := true
+
+# Official
+PB_OFFICIAL := true   
