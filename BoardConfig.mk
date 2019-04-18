@@ -83,6 +83,7 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_CRYPTO := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/etc/twrp.fstab
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_OREO_MR1_F2FS := true
@@ -99,4 +100,4 @@ TW_INCLUDE_FUSE_EXFAT := true
 TW_INCLUDE_FUSE_NTFS := true
 
 # Official
-PB_OFFICIAL := true   
+PB_OFFICIAL := true
