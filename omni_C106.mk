@@ -31,19 +31,10 @@ PRODUCT_PACKAGES += \
 	charger_res_images \
 	charger
 
-# Encryption
-PRODUCT_PACKAGES += \
-    libcryptfs_hw
-
 # Kernel
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/Image.gz-dtb:kernel
 
-
-
-# Encryption
-PRODUCT_PACKAGES += \
-libcryptfs_hw 
 
 # Device identifier. This must come after all inclusions
 PRODUCT_NAME := omni_C106
