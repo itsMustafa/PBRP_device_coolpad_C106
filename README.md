@@ -3,7 +3,7 @@
 
 The Cool1 Dual (C106) is a smartphone from Coolpad
 
-Device Configuration for s2
+Device Configuration for C106
 =====================================
 
 Basic   | Spec Sheet
